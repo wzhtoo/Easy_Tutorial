@@ -29,10 +29,22 @@ function createPassword() {
 //   document.execCommand("copy");
 // }
 
+// function copyPassword() {
+//   passwordBox.select();
+//   document.execCommand("copy");
+//   alert("Password copied to clipboard!");
+// }
+
 function copyPassword() {
   passwordBox.select();
-  document.execCommand("copy");
-  alert("Password copied to clipboard!");
+  navigator.clipboard
+    .writeText(passwordBox.value)
+    .then(() => {
+      console.log("Password copied to clipboard");
+    })
+    .catch((error) => {
+      console.error("Failed to copy password: ", error);
+    });
 }
 
 button.addEventListener("click", createPassword);
